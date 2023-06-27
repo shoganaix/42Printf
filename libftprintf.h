@@ -19,12 +19,12 @@
 # include <stddef.h>
 # include <stdlib.h>
 
-void			ft_string(char *args, int *length);
-void			ft_decimal(int number, int *length);
-void			ft_hexadecimal(unsigned int x, int *length, char x_or_x);
-void			ft_unsigned_int(unsigned int u, int *length);
-void			ft_pointer(size_t pointer, int *length);
-int				ft_printf(const char *format, ...);
+void		    	ft_string(char *args, int *length);
+void		    	ft_decimal(int number, int *length);
+void		    	ft_unsigned_int(unsigned int u, int *length);
+int				    ft_printf(const char *format, ...);
 static void 	ft_formatcheck(char c, va_list args, int *result);
+void			     ft_hexadecimal(unsigned int x, int *length, char c);
+void		    	ft_pointer(size_t pointer, int *length);
 
 #endif
