@@ -6,33 +6,34 @@
 /*   By: msoriano <msoriano@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 16:26:36 by msoriano          #+#    #+#             */
-/*   Updated: 2023/06/27 15:13:38 by msoriano         ###   ########.fr       */
+/*   Updated: 2023/08/03 17:28:50 by msoriano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
+#include <unistd.h>
 
-void ft_decimal(int nb, int *length)
+void	ft_decimal(int nb, int fd, int *length)
 {
-	if (nb == -2147483648)
-	{
-		ft_decimal(nb / 10, length);
-		write(1, "8", 1);
-	}
+	unsigned int	n;
+	char			digit;
+
 	if (nb < 0)
 	{
-		write(1, "-", length);
-		ft_decimal(-nb, length);
+		write(fd, "-", 1);
+		(*length)++;
+		n = (unsigned int)(nb * -1);
 	}
 	else
-	{
-		if (nb> 9)
-			ft_decimal(nb / 10, length);
-		write(1, (nb % 10 + '0'), length);
-	}
-	return (lenght(nb, 10));
+		n = (unsigned int)nb;
+	if (n >= 10)
+		ft_decimal(n / 10, fd, length);
+	digit = (char)(n % 10 + '0');
+	write(fd, &digit, 1);
+	(*length)++;
 }
-void ft_string(char *args, int *length)
+
+void	ft_string(char *args, int *length)
 {
 	size_t	i;
 
@@ -45,25 +46,28 @@ void ft_string(char *args, int *length)
 	}
 	while (args[i] != '\0')
 	{
-		write(1, &args[i], length);
+		write(1, &args[i], 1);
+		(*length)++;
 		i++;
 	}
 }
-void ft_unsignedint(unsigned int u, int *length)
+
+void	ft_unsignedint(unsigned int u, int *length)
 {
 	if (u >= 10)
-		ft_unsigned_int(u / 10, length);
-	ft_putcharacter_length(u % 10 + '0', length);
+		ft_unsignedint(u / 10, length);
+	write(1, &(char){(u % 10) + '0'}, 1);
+	(*length)++;
 }
-/* Corregir
+
 void	ft_pointer(size_t pointer, int *length)
 {
-	char	string[25];
+	char	string[17];
 	int		i;
 	char	*base_character;
 
-	base_character = "0123456789abcdef";
 	i = 0;
+	base_character = "0123456789abcdef";
 	write(1, "0x", 2);
 	(*length) += 2;
 	if (pointer == 0)
@@ -77,33 +81,38 @@ void	ft_pointer(size_t pointer, int *length)
 		pointer = pointer / 16;
 		i++;
 	}
-	while (i--)
+	while (i > 0)
 	{
+		i --;
 		ft_putcharacter_length(string[i], length);
 	}
 }
-void ft_hexadecimal(unsigned int x, int *length, char c)
+
+void	ft_hexadecimal(unsigned int x, char c, int *length)
 {
 	char	string[25];
 	char	*base_character;
 	int		i;
 
+	i = 0;
 	if (c == 'X')
-		base_character = "0123456789ABCDEF";
+	base_character = "0123456789ABCDEF";
 	else
 		base_character = "0123456789abcdef";
-	i = 0;
 	if (x == 0)
 	{
-		ft_putcharacter_length(1, '0', length);
+		ft_putcharacter_length('0', length);
 		return ;
 	}
 	while (x != 0)
 	{
-		string[i] = base_character [x % 16];
+		string[i] = base_character[x % 16];
 		x = x / 16;
 		i++;
 	}
-	while (i--)
+	while (i > 0)
+	{
+		i --;
 		ft_putcharacter_length(string[i], length);
-}*/
+	}
+}

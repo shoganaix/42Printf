@@ -6,14 +6,13 @@
 #    By: msoriano <msoriano@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/15 17:59:26 by msoriano          #+#    #+#              #
-#    Updated: 2023/06/15 18:01:35 by msoriano         ###   ########.fr        #
+#    Updated: 2023/08/03 15:55:19 by msoriano         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 
-SRC = ft_printf.c ft_printfutils.c
-OBJ = $(SRC:%.c=%.o)
+OBJ = ft_printf.o ft_printf_utils.o ft_printf_utilstwo.o
 
 CC = gcc
 RM = rm -f
@@ -21,11 +20,12 @@ RM = rm -f
 CFLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
-$(NAME):	$(OBJS)
-			ar rcs $(NAME) $(OBJS)
+
+$(NAME): $(OBJ)
+	$(AR) rcs $(NAME) $(OBJ)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c -o
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 clean:
 	$(RM) $(OBJ)
@@ -35,4 +35,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re
