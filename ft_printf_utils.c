@@ -6,7 +6,7 @@
 /*   By: msoriano <msoriano@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 16:26:36 by msoriano          #+#    #+#             */
-/*   Updated: 2023/08/03 17:28:50 by msoriano         ###   ########.fr       */
+/*   Updated: 2024/01/10 20:51:45 by msoriano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	ft_hexadecimal(unsigned int x, char c, int *length)
 
 	i = 0;
 	if (c == 'X')
-	base_character = "0123456789ABCDEF";
+		base_character = "0123456789ABCDEF";
 	else
 		base_character = "0123456789abcdef";
 	if (x == 0)
