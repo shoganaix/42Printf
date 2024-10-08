@@ -1,6 +1,6 @@
 # Printf
 
->_"Because i'm tired of using putnbr and putstr"_
+>_Because i'm tired of using putnbr and putstr_
 >
 >
 # Index
