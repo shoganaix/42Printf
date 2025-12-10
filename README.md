@@ -19,5 +19,5 @@ This was my third project as a 42 student.
 </p>
 
 <p align="center">
-<sub>NO BONUSES</sub>
+<sub>NO BONUS</sub>
 </p>
